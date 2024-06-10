@@ -1,0 +1,17 @@
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\bin\Debug\net6.0\ApexiBee.Application.deps.json
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\bin\Debug\net6.0\ApexiBee.Application.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\bin\Debug\net6.0\ApexiBee.Application.pdb
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\obj\Debug\net6.0\ApexiBee.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\obj\Debug\net6.0\ApexiBee.Application.AssemblyInfoInputs.cache
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\obj\Debug\net6.0\ApexiBee.Application.AssemblyInfo.cs
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\obj\Debug\net6.0\ApexiBee.Application.csproj.CoreCompileInputs.cache
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\obj\Debug\net6.0\ApexiBee.Application.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\obj\Debug\net6.0\refint\ApexiBee.Application.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\obj\Debug\net6.0\ApexiBee.Application.pdb
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\obj\Debug\net6.0\ref\ApexiBee.Application.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\bin\Debug\net6.0\ApexiBee.Domain.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\bin\Debug\net6.0\ApexiBee.Infrastructure.Interfaces.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\bin\Debug\net6.0\ApexiBee.Infrastructure.Interfaces.pdb
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\bin\Debug\net6.0\ApexiBee.Domain.pdb
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\obj\Debug\net6.0\ApexiBee.Application.csproj.AssemblyReference.cache
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\ApexiBee.Application\obj\Debug\net6.0\ApexiBee.EF4E7A29.Up2Date

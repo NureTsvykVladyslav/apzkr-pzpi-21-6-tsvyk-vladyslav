@@ -1,0 +1,13 @@
+{
+  "ssid": "Wokwi-GUEST",
+  "password": "",
+  "serverUrl": "https://apexibeeapi20240522115046.azurewebsites.net",
+  "humiditySensorId": "",
+  "weightSensorId": "",
+  "tempSensorId": "",
+  "hiveId": "A1E329F4-B0F9-4499-AF07-08DC759AAA1B",
+  "criticalHumidityHigh" : 90,
+  "criticalHumidityLow" : 10,
+  "criticalTempHigh" : 40,
+  "criticalTempLow" : -10
+}

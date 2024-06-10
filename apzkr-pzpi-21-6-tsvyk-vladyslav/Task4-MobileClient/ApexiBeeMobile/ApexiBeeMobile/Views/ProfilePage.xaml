@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ApexiBeeMobile.Views.ProfilePage"
+             xmlns:local="clr-namespace:ApexiBeeMobile.Extentions;assembly=ApexiBeeMobile"
+             Title="{local:Translate Profile}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <!-- Стиль для меток -->
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="#2c3e50" />
+                <Setter Property="Margin" Value="0,0,0,10" />
+            </Style>
+
+            <!-- Стиль для выделенного текста -->
+            <Style x:Key="BoldLabel" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Padding="20" Spacing="10">
+
+            <Label Text="{local:Translate Welcome}" FontSize="Large" TextColor="#3498db" HorizontalOptions="CenterAndExpand" />
+
+            <Label Text="{local:Translate AuthBeekeeper}" FontSize="Medium" TextColor="#2c3e50" HorizontalOptions="CenterAndExpand" />
+
+            <BoxView HeightRequest="1" Color="#bdc3c7" HorizontalOptions="FillAndExpand" />
+
+            <StackLayout>
+                <Label Style="{StaticResource BoldLabel}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{local:Translate Id}" />
+                            <Span Text=": " />
+                            <Span Text="{Binding CurrentBeekeeper.Id}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Text="{local:Translate FirstName}"/>
+                <Entry Text="{Binding CurrentBeekeeper.FirstName}"/>
+
+                <Label Text="{local:Translate LastName}" />
+                <Entry Text="{Binding CurrentBeekeeper.LastName}" />
+            </StackLayout>
+
+            <BoxView HeightRequest="1" Color="#bdc3c7" HorizontalOptions="FillAndExpand" />
+
+            <StackLayout>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{local:Translate Timezone}" />
+                            <Span Text=": " />
+                            <Span Text="{Binding TimeOffset}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{local:Translate CurrentTime}" />
+                            <Span Text=": " />
+                            <Span Text="{Binding CurrentTime}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            <Label Text="{Binding timeoffset}"></Label>
+
+            <Button Text="{local:Translate UpdateProfile}" Command="{Binding UpdateProfileCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

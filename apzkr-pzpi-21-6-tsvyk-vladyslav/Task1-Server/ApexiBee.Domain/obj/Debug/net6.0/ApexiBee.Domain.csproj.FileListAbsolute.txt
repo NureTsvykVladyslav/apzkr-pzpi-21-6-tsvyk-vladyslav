@@ -1,0 +1,11 @@
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Domain\bin\Debug\net6.0\ApexiBee.Domain.deps.json
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Domain\bin\Debug\net6.0\ApexiBee.Domain.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Domain\bin\Debug\net6.0\ApexiBee.Domain.pdb
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Domain\obj\Debug\net6.0\ApexiBee.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Domain\obj\Debug\net6.0\ApexiBee.Domain.AssemblyInfoInputs.cache
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Domain\obj\Debug\net6.0\ApexiBee.Domain.AssemblyInfo.cs
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Domain\obj\Debug\net6.0\ApexiBee.Domain.csproj.CoreCompileInputs.cache
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Domain\obj\Debug\net6.0\ApexiBee.Domain.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Domain\obj\Debug\net6.0\refint\ApexiBee.Domain.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Domain\obj\Debug\net6.0\ApexiBee.Domain.pdb
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Domain\obj\Debug\net6.0\ref\ApexiBee.Domain.dll

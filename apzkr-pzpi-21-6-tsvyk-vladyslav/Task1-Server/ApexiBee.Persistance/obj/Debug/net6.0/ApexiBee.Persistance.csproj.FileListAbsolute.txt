@@ -1,0 +1,17 @@
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\bin\Debug\net6.0\ApexiBee.Persistance.deps.json
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\bin\Debug\net6.0\ApexiBee.Persistance.runtimeconfig.json
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\bin\Debug\net6.0\ApexiBee.Persistance.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\bin\Debug\net6.0\ApexiBee.Persistance.pdb
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\bin\Debug\net6.0\ApexiBee.Domain.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\bin\Debug\net6.0\ApexiBee.Domain.pdb
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\obj\Debug\net6.0\ApexiBee.Persistance.csproj.AssemblyReference.cache
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\obj\Debug\net6.0\ApexiBee.Persistance.GeneratedMSBuildEditorConfig.editorconfig
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\obj\Debug\net6.0\ApexiBee.Persistance.AssemblyInfoInputs.cache
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\obj\Debug\net6.0\ApexiBee.Persistance.AssemblyInfo.cs
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\obj\Debug\net6.0\ApexiBee.Persistance.csproj.CoreCompileInputs.cache
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\obj\Debug\net6.0\ApexiBee.Persistance.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\obj\Debug\net6.0\refint\ApexiBee.Persistance.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\obj\Debug\net6.0\ApexiBee.Persistance.pdb
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\obj\Debug\net6.0\ApexiBee.Persistance.genruntimeconfig.cache
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\obj\Debug\net6.0\ref\ApexiBee.Persistance.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Persistance\obj\Debug\net6.0\ApexiBee.643594BC.Up2Date

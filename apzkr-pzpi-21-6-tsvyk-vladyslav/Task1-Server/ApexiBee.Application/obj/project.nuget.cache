@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "dgSpecHash": "YDrdidfHSRDqUZaowMhkwPyyWtf+U/T/tbh+5H9Y5bZcp/6YXKlwL4wVUlkJYbXhcP8zY4gLAAI9+nv5Llywyg==",
+  "success": true,
+  "projectFilePath": "D:\\Учеба\\3к_в\\апз\\applications\\ApexiBee\\Backend\\ApexiBeeServer\\ApexiBee.Application\\ApexiBee.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\vlcvi\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\vlcvi\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\6.8.0\\microsoft.identitymodel.jsonwebtokens.6.8.0.nupkg.sha512",
+    "C:\\Users\\vlcvi\\.nuget\\packages\\microsoft.identitymodel.logging\\6.8.0\\microsoft.identitymodel.logging.6.8.0.nupkg.sha512",
+    "C:\\Users\\vlcvi\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.8.0\\microsoft.identitymodel.tokens.6.8.0.nupkg.sha512",
+    "C:\\Users\\vlcvi\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.8.0\\system.identitymodel.tokens.jwt.6.8.0.nupkg.sha512",
+    "C:\\Users\\vlcvi\\.nuget\\packages\\system.security.cryptography.cng\\4.5.0\\system.security.cryptography.cng.4.5.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1902",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "У пакета \"System.IdentityModel.Tokens.Jwt\" 6.8.0 есть известная уязвимость https://github.com/advisories/GHSA-59j7-ghrg-fj52 (уровень серьезности: средний уровень)",
+      "libraryId": "System.IdentityModel.Tokens.Jwt",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
+}

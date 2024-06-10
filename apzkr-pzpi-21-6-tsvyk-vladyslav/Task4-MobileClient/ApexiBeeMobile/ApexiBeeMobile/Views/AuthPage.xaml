@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.NavBarIsVisible="False"
+             xmlns:locale="clr-namespace:ApexiBeeMobile.Extentions;assembly=ApexiBeeMobile"
+             x:Class="ApexiBeeMobile.Views.AuthPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand" Padding="20">
+            <Image Source="logo.png" WidthRequest="200"></Image>
+            <Label Text="ApexiBee" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,0,0,20" />
+
+            <Entry Text="{Binding Username, Mode=TwoWay}" Placeholder="{locale:Translate Login}" Margin="0,0,0,10" />
+            <Entry Text="{Binding Password, Mode=TwoWay}" Placeholder="{locale:Translate Password}" IsPassword="True" Margin="0,0,0,20" />
+
+            <Button x:Name="LoginButton" Text="{locale:Translate SignIn}" Clicked="OnLoginClicked" HorizontalOptions="FillAndExpand" BackgroundColor="#9966CC" TextColor="White" />
+
+            <Label Text="{locale:Translate ForgotPassword}" HorizontalOptions="Center" Margin="0,20,0,0" TextColor="#9966CC" />
+
+            <Label HorizontalOptions="Center" Text="{Binding MessageText, Mode=TwoWay}" IsVisible="{Binding IsMessageExists, Mode=TwoWay}" TextColor="Red" Margin="10" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

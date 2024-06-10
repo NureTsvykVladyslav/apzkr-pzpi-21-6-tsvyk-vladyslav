@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "ApexiBee.Infrastructure.Interfaces/1.0.0": {
+        "dependencies": {
+          "ApexiBee.Domain": "1.0.0"
+        },
+        "runtime": {
+          "ApexiBee.Infrastructure.Interfaces.dll": {}
+        }
+      },
+      "ApexiBee.Domain/1.0.0": {
+        "runtime": {
+          "ApexiBee.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ApexiBee.Infrastructure.Interfaces/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ApexiBee.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

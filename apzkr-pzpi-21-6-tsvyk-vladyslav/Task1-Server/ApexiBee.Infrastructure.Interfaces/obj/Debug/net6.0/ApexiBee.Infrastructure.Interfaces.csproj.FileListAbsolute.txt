@@ -1,0 +1,15 @@
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Infrastructure.Interfaces\bin\Debug\net6.0\ApexiBee.Infrastructure.Interfaces.deps.json
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Infrastructure.Interfaces\bin\Debug\net6.0\ApexiBee.Infrastructure.Interfaces.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Infrastructure.Interfaces\bin\Debug\net6.0\ApexiBee.Infrastructure.Interfaces.pdb
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Infrastructure.Interfaces\obj\Debug\net6.0\ApexiBee.Infrastructure.Interfaces.GeneratedMSBuildEditorConfig.editorconfig
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Infrastructure.Interfaces\obj\Debug\net6.0\ApexiBee.Infrastructure.Interfaces.AssemblyInfoInputs.cache
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Infrastructure.Interfaces\obj\Debug\net6.0\ApexiBee.Infrastructure.Interfaces.AssemblyInfo.cs
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Infrastructure.Interfaces\obj\Debug\net6.0\ApexiBee.Infrastructure.Interfaces.csproj.CoreCompileInputs.cache
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Infrastructure.Interfaces\obj\Debug\net6.0\ApexiBee.Infrastructure.Interfaces.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Infrastructure.Interfaces\obj\Debug\net6.0\refint\ApexiBee.Infrastructure.Interfaces.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Infrastructure.Interfaces\obj\Debug\net6.0\ApexiBee.Infrastructure.Interfaces.pdb
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Infrastructure.Interfaces\obj\Debug\net6.0\ref\ApexiBee.Infrastructure.Interfaces.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Infrastructure.Interfaces\bin\Debug\net6.0\ApexiBee.Domain.dll
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Infrastructure.Interfaces\bin\Debug\net6.0\ApexiBee.Domain.pdb
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Infrastructure.Interfaces\obj\Debug\net6.0\ApexiBee.Infrastructure.Interfaces.csproj.AssemblyReference.cache
+D:\Учеба\3к_в\апз\applications\ApexiBee\Backend\ApexiBeeServer\Infrastructure.Interfaces\obj\Debug\net6.0\ApexiBee.94F2A72A.Up2Date

@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "author": "Vladyslav Tsvyk",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 81.64, "attrs": {} },
+    {
+      "type": "wokwi-hx711",
+      "id": "cell1",
+      "top": 2.6,
+      "left": 252.2,
+      "attrs": { "type": "50kg" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -201.3,
+      "left": 13.8,
+      "attrs": { "temperature": "66.5", "humidity": "27.5" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 111.8,
+      "left": -86.4,
+      "attrs": { "color": "green" }
+    },
+    { "type": "wokwi-led", "id": "led1", "top": 6, "left": -73, "attrs": { "color": "red" } },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn2",
+      "top": 179,
+      "left": -86.4,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-microsd-card",
+      "id": "sd1",
+      "top": 162.77,
+      "left": 263.53,
+      "rotate": 180,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "cell1:GND", "esp:GND.2", "black", [ "h-57.6", "v28.5" ] ],
+    [ "cell1:VCC", "esp:5V", "red", [ "h-28.8", "v182.4", "h-163.2", "v-38.4" ] ],
+    [ "cell1:DT", "esp:4", "green", [ "h-48", "v133.9" ] ],
+    [ "cell1:SCK", "esp:0", "blue", [ "h-38.4", "v133.6" ] ],
+    [ "dht1:VCC", "esp:3V3", "red", [ "v115.2", "h57.6" ] ],
+    [ "dht1:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "dht1:SDA", "esp:22", "green", [ "v67.2", "h153.7", "v96" ] ],
+    [ "btn1:1.r", "esp:25", "green", [ "v0", "h57.8", "v19.2" ] ],
+    [ "btn1:2.r", "esp:GND.1", "black", [ "h48.2", "v48.2" ] ],
+    [ "led1:A", "esp:32", "green", [ "v9.6", "h96", "v28.8" ] ],
+    [ "led1:C", "esp:GND.1", "black", [ "v19.2", "h125.2", "v86.4" ] ],
+    [ "btn2:1.r", "esp:26", "green", [ "v0", "h67.4", "v-76.8" ] ],
+    [ "btn2:2.r", "esp:GND.1", "black", [ "h38.6", "v-57.4" ] ],
+    [ "sd1:DO", "esp:19", "gold", [ "h-76.8", "v-67.31" ] ],
+    [ "sd1:GND", "esp:GND.2", "black", [ "h-67.2", "v-124.91" ] ],
+    [ "sd1:SCK", "esp:18", "purple", [ "h-105.6", "v-95.99" ] ],
+    [ "sd1:VCC", "esp:3V3", "red", [ "h-172.8", "v-182.54", "h-28.8", "v19.2" ] ],
+    [ "sd1:DI", "esp:23", "blue", [ "h-115.2", "v-143.91" ] ],
+    [ "sd1:CS", "esp:5", "green", [ "h-96", "v-57.66" ] ]
+  ],
+  "dependencies": {}
+}

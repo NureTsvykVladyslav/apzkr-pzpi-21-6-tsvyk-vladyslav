@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ApexiBeeMobile.Views.ApiaryPage"
+             xmlns:local="clr-namespace:ApexiBeeMobile.Extentions;assembly=ApexiBeeMobile"
+             Title="{local:Translate Apiaries}">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <ListView SelectedItem="{Binding SelectedApiary, Mode=TwoWay}" HasUnevenRows="True" x:Name="apiariesList" ItemsSource="{Binding Apiaries}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Frame Padding="10" Margin="5" BorderColor="LightGray" CornerRadius="10" HasShadow="True">
+                                    <StackLayout Orientation="Vertical" Spacing="5">
+                                        <Label Text="{Binding Name}" FontSize="Medium" FontAttributes="Bold" TextColor="DarkBlue" />
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Grid.Row="0" Grid.Column="0" Text="ID:" FontAttributes="Bold" />
+                                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Id}" LineBreakMode="TailTruncation" />
+
+                                            <Label Grid.Row="1" Grid.Column="0" Text="Description:" FontAttributes="Bold" />
+                                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Description}" LineBreakMode="WordWrap" />
+                                        </Grid>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
