@@ -1,20 +1,18 @@
-﻿using ApexiBeeMobile.Interfaces;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
-using System.Text;
-using Xamarin.Forms.Xaml;
+using ApexiBeeMobile.Interfaces;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace ApexiBeeMobile.Extentions
 {
     [ContentProperty("Text")]
     public class TranslateExtension : IMarkupExtension
     {
-        readonly CultureInfo cultureInfo;
-        const string resourceId = "ApexiBeeMobile.Resources.Resource";
+        private const string ResourceId = "ApexiBeeMobile.Resources.Resource";
+        private readonly CultureInfo cultureInfo;
 
         public TranslateExtension()
         {
@@ -26,10 +24,11 @@ namespace ApexiBeeMobile.Extentions
         public object ProvideValue(IServiceProvider serviceProvider)
         {
             if (Text == null)
-                return "";
+            {
+                return string.Empty;
+            }
 
-            ResourceManager resourceManager = new ResourceManager(resourceId,
-                        typeof(TranslateExtension).GetTypeInfo().Assembly);
+            ResourceManager resourceManager = new ResourceManager(ResourceId, typeof(TranslateExtension).GetTypeInfo().Assembly);
 
             var translation = resourceManager.GetString(Text, cultureInfo);
 
@@ -37,6 +36,7 @@ namespace ApexiBeeMobile.Extentions
             {
                 translation = Text;
             }
+
             return translation;
         }
     }

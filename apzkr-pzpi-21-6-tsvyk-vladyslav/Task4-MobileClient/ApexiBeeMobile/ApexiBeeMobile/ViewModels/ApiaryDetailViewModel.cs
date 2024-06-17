@@ -1,24 +1,20 @@
-﻿using ApexiBeeMobile.Interfaces;
-using ApexiBeeMobile.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Text;
 using System.Threading.Tasks;
+using ApexiBeeMobile.Interfaces;
+using ApexiBeeMobile.Models;
 using Xamarin.Forms;
 
 namespace ApexiBeeMobile.ViewModels
 {
     [QueryProperty(nameof(Id), nameof(Id))]
-    class ApiaryDetailViewModel
+    public class ApiaryDetailViewModel
     {
-        public Apiary CurrentApiary { get; set; }
+        private readonly IApiaryService apiaryService;
 
-        public ObservableCollection<Hive> Hives { get; set; }
-
-        private IApiaryService apiaryService { get; set; }
-        private ISensorService sensorService { get; set; }
+        private readonly ISensorService sensorService;
 
         public ApiaryDetailViewModel()
         {
@@ -27,22 +23,26 @@ namespace ApexiBeeMobile.ViewModels
             sensorService = DependencyService.Get<ISensorService>();
         }
 
+        public Apiary CurrentApiary { get; set; }
+
+        public ObservableCollection<Hive> Hives { get; set; }
+
         public string Id
         {
-            set
-            {
-                Guid apiaryId = Guid.Parse(value);
-                LoadHives(apiaryId);
-            }
             get
             {
                 return CurrentApiary.Id.ToString();
+            }
+
+            set
+            {
+                Guid apiaryId = Guid.Parse(value);
+                _ = LoadHives(apiaryId);
             }
         }
 
         public async Task LoadHives(Guid apiaryId)
         {
-
             try
             {
                 IEnumerable<Hive> hives = await apiaryService.GetApiaryHives(apiaryId);
@@ -69,7 +69,7 @@ namespace ApexiBeeMobile.ViewModels
                 IEnumerable<Sensor> lastReadings = await sensorService.GetLastReadingSensorsOfHive(hive.Id);
                 hive.Sensors = lastReadings;
             }
-            catch (Exception ex)
+            catch
             {
                 Debug.WriteLine("Failed to load hive sensor data");
             }

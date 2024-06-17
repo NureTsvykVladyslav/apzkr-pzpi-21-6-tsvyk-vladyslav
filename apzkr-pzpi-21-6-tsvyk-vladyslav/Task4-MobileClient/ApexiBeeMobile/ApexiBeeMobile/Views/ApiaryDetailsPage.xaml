@@ -39,7 +39,7 @@
                                                 <StackLayout BindableLayout.ItemsSource="{Binding Sensors}" Orientation="Vertical">
                                                     <BindableLayout.ItemTemplate>
                                                         <DataTemplate>
-                                                            <Label Text="{Binding Value}" FontSize="Small" />
+                                                            <Label Text="{Binding SensorType.Name}" FontSize="Small" />
                                                         </DataTemplate>
                                                     </BindableLayout.ItemTemplate>
                                                 </StackLayout>

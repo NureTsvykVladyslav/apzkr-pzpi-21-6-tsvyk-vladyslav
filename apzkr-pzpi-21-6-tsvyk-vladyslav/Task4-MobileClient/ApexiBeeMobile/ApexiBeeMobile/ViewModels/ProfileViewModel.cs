@@ -1,37 +1,44 @@
-﻿using ApexiBeeMobile.DTO;
-using ApexiBeeMobile.Interfaces;
-using ApexiBeeMobile.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
-using ApexiBeeMobile.Localisation;
 using System.Windows.Input;
+using ApexiBeeMobile.DTO;
+using ApexiBeeMobile.Interfaces;
+using ApexiBeeMobile.Localisation;
+using ApexiBeeMobile.Models;
+using Xamarin.Forms;
 
 namespace ApexiBeeMobile.ViewModels
 {
     public class ProfileViewModel : INotifyPropertyChanged
     {
-        private IAuthService _authService;
+        private readonly IAuthService _authService;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public User CurrentBeekeeper { get; set; }
 
-        TimeSpan timeOffset = new DateTimeOffset(DateTime.Now).Offset;
+        private TimeSpan TimeOffsetValue = new DateTimeOffset(DateTime.Now).Offset;
 
         public string TimeOffset
         {
             get
             {
-                int offset = timeOffset.Hours;
+                int offset = TimeOffsetValue.Hours;
                 if (offset > 0)
+                {
                     return $"GTM+{offset}";
+                }
+
                 if (offset == 0)
+                {
                     return "GTM 0";
+                }
                 else
+                {
                     return $"GTM{offset}";
+                }
             }
         }
 
@@ -52,19 +59,20 @@ namespace ApexiBeeMobile.ViewModels
             UpdateProfileCommand = new Command(async () => await UpdateUserProfile());
         }
 
-        public async void LoadBeekeeper()
+        public async Task LoadBeekeeper()
         {
             Guid cynologistId = _authService.GetUserAccountIdFromToken();
             CurrentBeekeeper = await _authService.GetUserById(cynologistId);
             OnPropertyChanged(nameof(CurrentBeekeeper));
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var changed = PropertyChanged;
             if (changed == null)
+            {
                 return;
+            }
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

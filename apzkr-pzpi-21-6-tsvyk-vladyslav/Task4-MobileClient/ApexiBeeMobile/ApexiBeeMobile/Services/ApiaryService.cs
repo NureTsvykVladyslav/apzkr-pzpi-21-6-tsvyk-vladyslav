@@ -1,11 +1,10 @@
-﻿using ApexiBeeMobile.Interfaces;
-using ApexiBeeMobile.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using ApexiBeeMobile.Interfaces;
+using ApexiBeeMobile.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -15,7 +14,7 @@ namespace ApexiBeeMobile.Services
     {
         private readonly IAuthService _authService;
 
-        readonly string apiUrl = Preferences.Get("ApiUrl", "") + "/api/Apiary";
+        private readonly string apiUrl = Preferences.Get("ApiUrl", string.Empty) + "/api/Apiary";
 
         public ApiaryService()
         {

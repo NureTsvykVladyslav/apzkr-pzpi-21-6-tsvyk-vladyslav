@@ -7,8 +7,16 @@ namespace ApexiBeeMobile.Models
     public class Sensor
     {
         public Guid SensorTypeId { get; set; }
+
         public SensorType SensorType { get; set; }
+
         public Guid HiveId { get; set; }
+
         public SensorReading LastReading { get; set; }
+
+        public override string ToString()
+        {
+            return SensorType.Name + " " + LastReading.Value.ToString();
+        }
     }
 }

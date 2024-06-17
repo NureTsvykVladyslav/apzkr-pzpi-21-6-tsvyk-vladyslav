@@ -1,9 +1,7 @@
-﻿using ApexiBeeMobile.DTO;
-using ApexiBeeMobile.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
+using ApexiBeeMobile.DTO;
+using ApexiBeeMobile.Models;
 
 namespace ApexiBeeMobile.Interfaces
 {

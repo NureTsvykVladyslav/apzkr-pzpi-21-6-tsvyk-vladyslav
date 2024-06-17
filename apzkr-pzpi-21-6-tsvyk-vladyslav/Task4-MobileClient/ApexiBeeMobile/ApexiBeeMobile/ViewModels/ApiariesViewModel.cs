@@ -1,22 +1,19 @@
-﻿using ApexiBeeMobile.Interfaces;
-using ApexiBeeMobile.Models;
-using ApexiBeeMobile.Views;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Text;
 using System.Threading.Tasks;
+using ApexiBeeMobile.Interfaces;
+using ApexiBeeMobile.Models;
+using ApexiBeeMobile.Views;
 using Xamarin.Forms;
 
 namespace ApexiBeeMobile.ViewModels
 {
     public class ApiariesViewModel
     {
-        public ObservableCollection<Apiary> Apiaries { get; set; }
-        private Apiary selectedApiary { get; set; }
+        private readonly IApiaryService _apiaryService;
 
-        private IApiaryService _apiaryService = DependencyService.Get<IApiaryService>();
+        private Apiary selectedApiary;
 
         public ApiariesViewModel()
         {
@@ -24,27 +21,12 @@ namespace ApexiBeeMobile.ViewModels
             this._apiaryService = DependencyService.Get<IApiaryService>();
         }
 
-        public async Task GetApiaries()
-        {
-            try
-            {
-                IEnumerable<Apiary> apiaries = await this._apiaryService.GetUserApiaries();
-                Apiaries.Clear();
-
-                // Adding loaded from server data to obserable collection
-                foreach (var apiary in apiaries)
-                    Apiaries.Add(apiary);
-            }
-            catch
-            {
-                Debug.WriteLine("Failed to load apiaries list");
-                Apiaries = null;
-            }
-        }
+        public ObservableCollection<Apiary> Apiaries { get; set; }
 
         public Apiary SelectedApiary
         {
-            get { return selectedApiary; }
+            get => selectedApiary;
+
             set
             {
                 if (selectedApiary != value)
@@ -60,6 +42,26 @@ namespace ApexiBeeMobile.ViewModels
                     selectedApiary = null;
                     Shell.Current.GoToAsync($"{nameof(ApiaryDetailsPage)}?Id={tempApiary.Id}");
                 }
+            }
+        }
+
+        public async Task GetApiaries()
+        {
+            try
+            {
+                IEnumerable<Apiary> apiaries = await this._apiaryService.GetUserApiaries();
+                Apiaries.Clear();
+
+                // Adding loaded from server data to obserable collection
+                foreach (var apiary in apiaries)
+                {
+                    Apiaries.Add(apiary);
+                }
+            }
+            catch
+            {
+                Debug.WriteLine("Failed to load apiaries list");
+                Apiaries = null;
             }
         }
     }
