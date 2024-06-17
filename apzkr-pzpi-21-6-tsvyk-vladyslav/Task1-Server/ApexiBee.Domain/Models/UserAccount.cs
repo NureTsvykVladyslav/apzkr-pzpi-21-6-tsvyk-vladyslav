@@ -11,5 +11,9 @@ namespace ApexiBee.Domain.Models
         public DateTime RegistrationDate { get; set; }
 
         public IEnumerable<Apiary> Apiaries { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
     }
 }

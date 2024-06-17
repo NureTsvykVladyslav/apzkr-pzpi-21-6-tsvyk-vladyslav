@@ -39,7 +39,7 @@ namespace ApexiBee.API.Controllers
         [HttpDelete("serial/id/{serialDataId}")]
         public async Task<IActionResult> DeleteSerialDataById([FromRoute] Guid serialDataId)
         {
-            await equipmentService.RemoveSerialDataById(serialDataId);
+            await this.equipmentService.RemoveSerialDataById(serialDataId);
             return Ok();
         }
     }

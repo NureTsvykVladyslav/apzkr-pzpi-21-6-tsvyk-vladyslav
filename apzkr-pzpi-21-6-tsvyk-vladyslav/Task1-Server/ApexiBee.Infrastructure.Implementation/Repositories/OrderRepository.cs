@@ -2,18 +2,15 @@
 using ApexiBee.Infrastructure.Interfaces.Repository;
 using ApexiBee.Persistance.Database;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApexiBee.Infrastructure.Implementation.Repositories
 {
     public class OrderRepository : AbstractRepository, IOrderRepository
     {
-        public OrderRepository(BeeDbContext context) : base(context)
-        { }
+        public OrderRepository(BeeDbContext context)
+            : base(context)
+        {
+        }
 
         public async Task AddAsync(Order entity)
         {

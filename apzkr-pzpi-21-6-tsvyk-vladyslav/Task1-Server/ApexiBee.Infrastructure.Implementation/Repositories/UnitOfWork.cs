@@ -2,11 +2,6 @@
 using ApexiBee.Infrastructure.Interfaces.Repository;
 using ApexiBee.Infrastructure.Interfaces.Repository_Interfaces;
 using ApexiBee.Persistance.Database;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApexiBee.Infrastructure.Implementation.Repositories
 {
@@ -16,7 +11,6 @@ namespace ApexiBee.Infrastructure.Implementation.Repositories
 
         public UnitOfWork(BeeDbContext context)
         {
-
             this.ApiaryRepository = new ApiaryRepository(context);
             this.HiveRepository = new HiveRepository(context);
             this.HubStationRepository = new HubStationRepository(context);

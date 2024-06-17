@@ -18,7 +18,11 @@ namespace ApexiBee.Application.Interfaces
 
         Task<Order> CancelOrder(Guid orderId);
 
+        Task<Order> ChangeOrderDescription(Guid orderId, string description);
+
         Task<IEnumerable<Order>> GetUserOrders(Guid userId);
+
+        Task<IEnumerable<Order>> GetManagerOrders(Guid managerId);
 
         Task<IEnumerable<Order>> GetAllOrders();
 

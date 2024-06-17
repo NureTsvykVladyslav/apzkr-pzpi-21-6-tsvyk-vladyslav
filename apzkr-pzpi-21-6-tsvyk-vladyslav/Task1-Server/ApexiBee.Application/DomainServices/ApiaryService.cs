@@ -5,26 +5,23 @@ using ApexiBee.Application.Interfaces;
 using ApexiBee.Application.Services;
 using ApexiBee.Domain.Models;
 using ApexiBee.Infrastructure.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApexiBee.Application.DomainServices
 {
     public class ApiaryService : ServiceBase, IApiaryService
     {
-        public ApiaryService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        { }
+        public ApiaryService(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
+        {
+        }
 
         public async Task<Hive> AddNewHive(NewHiveData hiveData)
         {
             Apiary? foundApiary = null;
-            if(hiveData.ApiaryId.HasValue)
+            if (hiveData.ApiaryId.HasValue)
             {
                 foundApiary = await unitOfWork.ApiaryRepository.GetByIdAsync((Guid)hiveData.ApiaryId);
-                if(foundApiary == null)
+                if (foundApiary == null)
                 {
                     throw new NotFoundException("apiary");
                 }
@@ -38,7 +35,7 @@ namespace ApexiBee.Application.DomainServices
                 throw new NotFoundException("serial data");
             }
 
-            if(serialData.EquipmentName.ToLower() != "hive")
+            if (serialData.EquipmentName.ToLower() != "hive")
             {
                 throw new ArgumentException("Provided serial number corresponds to a different type of equipment", nameof(hiveData));
             }
@@ -71,7 +68,7 @@ namespace ApexiBee.Application.DomainServices
         public async Task CheckHive(Guid hiveId)
         {
             Hive? foundHive = await unitOfWork.HiveRepository.GetByIdAsync(hiveId);
-            if(foundHive == null)
+            if (foundHive == null)
             {
                 throw new NotFoundException(hiveId, "hive");
             }
@@ -84,7 +81,7 @@ namespace ApexiBee.Application.DomainServices
         public async Task<Apiary> CreateApiary(NewApiaryData apiaryData, NewHubStationData hubData)
         {
             UserAccount? foundBeekeeperAccount = await unitOfWork.UserRepository.GetByIdAsync(apiaryData.BeekeeperUserId);
-            if(foundBeekeeperAccount == null)
+            if (foundBeekeeperAccount == null)
             {
                 throw new NotFoundException(apiaryData.BeekeeperUserId, "beekeeper");
             }
@@ -102,9 +99,9 @@ namespace ApexiBee.Application.DomainServices
 
             HubStation hubStation = await CreateNewHubStationWithoutAdding(hubData);
 
-            await unitOfWork.ApiaryRepository.AddAsync(apiary);
-            await unitOfWork.HubStationRepository.AddAsync(hubStation);
-            await unitOfWork.SaveAsync();
+            await this.unitOfWork.ApiaryRepository.AddAsync(apiary);
+            await this.unitOfWork.HubStationRepository.AddAsync(hubStation);
+            await this.unitOfWork.SaveAsync();
             return apiary;
         }
 
@@ -116,6 +113,7 @@ namespace ApexiBee.Application.DomainServices
             {
                 throw new NotFoundException("serial number");
             }
+
             if (foundSerial.EquipmentName.ToLower() != "hub")
             {
                 throw new ArgumentException("Provided serial number corresponds to a different type of equipment", nameof(hubData));
@@ -133,7 +131,11 @@ namespace ApexiBee.Application.DomainServices
                 Longitude = hubData.Longitude,
                 EquipmentRegistrationDate = DateTime.UtcNow,
                 SerialDataId = foundSerial.Id,
-                ApiaryId = hubData.ApiaryId
+                ApiaryId = hubData.ApiaryId,
+                CriticalHumidityHigh = hubData.CriticalHumidityHigh,
+                CriticalHumidityLow = hubData.CriticalHumidityLow,
+                CriticalTemperaruteHigh = hubData.CriticalTemperatureHigh,
+                CriticalTemperatureLow = hubData.CriticalTemperatureLow
             };
 
             return hubStation;
@@ -143,7 +145,7 @@ namespace ApexiBee.Application.DomainServices
         {
             Apiary? foundApiary = await unitOfWork.ApiaryRepository.GetByIdWithHivesAsync(apiaryId);
 
-            if(foundApiary == null)
+            if (foundApiary == null)
             {
                 throw new NotFoundException(apiaryId, "apiary");
             }
@@ -175,11 +177,50 @@ namespace ApexiBee.Application.DomainServices
             return foundApiary.Hives;
         }
 
+        public async Task<HiveConfiguration> GetHiveConfiguration(Guid hiveId)
+        {
+            Hive? foundHive = await unitOfWork.HiveRepository.GetByIdWithAllDetailsAsync(hiveId);
+            if (foundHive == null)
+            {
+                throw new NotFoundException(hiveId, "hive");
+            }
+
+            Apiary? apiaryWithDetails = await unitOfWork.ApiaryRepository.GetByIdWithHivesAsync(foundHive.ApiaryId!.Value);
+            Sensor? humiditySensor = foundHive.Sensors.FirstOrDefault(e => e.SensorType.Name.ToLower() == "humidity");
+            Sensor? weightSensor = foundHive.Sensors.FirstOrDefault(e => e.SensorType.Name.ToLower() == "weight");
+            Sensor? tempSensor = foundHive.Sensors.FirstOrDefault(e => e.SensorType.Name.ToLower() == "temperature");
+
+            if (apiaryWithDetails == null)
+            {
+                throw new NotFoundException("apiary");
+            }
+
+            if (humiditySensor == null || weightSensor == null || tempSensor == null)
+            {
+                throw new NotFoundException("one of the sensors");
+            }
+
+            HiveConfiguration hiveConfiguration = new HiveConfiguration()
+            {
+                HiveId = foundHive.Id,
+                HumiditySensorId = humiditySensor.Id,
+                WeightSensorId = weightSensor.Id,
+                TempSensorId = tempSensor.Id,
+                HubId = apiaryWithDetails.Hub.Id,
+                CriticalTempHigh = apiaryWithDetails.Hub.CriticalTemperaruteHigh,
+                CriticalTempLow = apiaryWithDetails.Hub.CriticalTemperatureLow,
+                CriticalHumidityHigh = apiaryWithDetails.Hub.CriticalHumidityHigh,
+                CriticalHumidityLow = apiaryWithDetails.Hub.CriticalHumidityLow
+            };
+
+            return hiveConfiguration;
+        }
+
         public async Task<IEnumerable<Apiary>> GetUserApiaries(Guid userId)
         {
             UserAccount? foundUser = await unitOfWork.UserRepository.GetByIdAsync(userId);
 
-            if(foundUser == null)
+            if (foundUser == null)
             {
                 throw new NotFoundException(userId, "user account");
             }
@@ -191,13 +232,24 @@ namespace ApexiBee.Application.DomainServices
         {
             Hive? foundHive = await unitOfWork.HiveRepository.GetByIdAsync(hiveId);
 
-            if(foundHive == null)
+            if (foundHive == null)
             {
                 throw new NotFoundException(hiveId, "hive");
             }
 
             unitOfWork.HiveRepository.Delete(foundHive);
             await unitOfWork.SaveAsync();
+        }
+
+        public async Task<Hive> GetHiveById(Guid hiveId)
+        {
+            var hive = await this.unitOfWork.HiveRepository.GetByIdAsync(hiveId);
+            if (hive == null)
+            {
+                throw new NotFoundException(hiveId, "hive");
+            }
+
+            return hive;
         }
     }
 }

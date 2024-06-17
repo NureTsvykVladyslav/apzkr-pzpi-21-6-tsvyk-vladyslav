@@ -1,16 +1,9 @@
-﻿using ApexiBee.Application.Interfaces;
+﻿using System.Data;
+using ApexiBee.Application.Interfaces;
 using ApexiBee.Infrastructure.Implementation.Helpers;
-using ApexiBee.Persistance.Database;
-using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Data.SqlClient;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApexiBee.Infrastructure.Implementation.Services
 {
@@ -23,19 +16,19 @@ namespace ApexiBee.Infrastructure.Implementation.Services
 
         public DatabaseService(ConfigurationHelper configurationHelper)
         {
-            _configurationHelper = configurationHelper;
+            this._configurationHelper = configurationHelper;
         }
 
         public bool CreateDbBackup()
         {
-            ServerConnection serverConnection = new ServerConnection(serverName);
+            ServerConnection serverConnection = new ServerConnection(this.serverName);
             Server server = new Server(serverConnection);
 
             Backup backup = new Backup();
             backup.Action = BackupActionType.Database;
-            backup.Database = databaseName;
+            backup.Database = this.databaseName;
 
-            BackupDeviceItem backupDeviceItem = new BackupDeviceItem(backupName, DeviceType.File);
+            BackupDeviceItem backupDeviceItem = new BackupDeviceItem(this.backupName, DeviceType.File);
             backup.Devices.Add(backupDeviceItem);
 
             backup.SqlBackup(server);
@@ -44,20 +37,26 @@ namespace ApexiBee.Infrastructure.Implementation.Services
 
         public bool RestoreDbFromLastBackup()
         {
-            ServerConnection serverConnection = new ServerConnection(serverName);
+            ServerConnection serverConnection = new ServerConnection(this.serverName);
             Server server = new Server(serverConnection);
 
-            server.ConnectionContext.ExecuteNonQuery($"ALTER DATABASE [{databaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
+            server.ConnectionContext.ExecuteNonQuery($"ALTER DATABASE [{this.databaseName}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
 
             Restore restore = new Restore();
 
-            restore.Database = databaseName;
+            restore.Database = this.databaseName;
             restore.Action = RestoreActionType.Database;
-            restore.Devices.AddDevice(backupName, DeviceType.File);
+            restore.Devices.AddDevice(this.backupName, DeviceType.File);
+
+            DataTable backupSets = restore.ReadBackupHeader(server);
+
+            int fileNumber = backupSets.Rows.Count;
+
+            restore.FileNumber = fileNumber;
 
             restore.SqlRestore(server);
 
-            server.ConnectionContext.ExecuteNonQuery($"ALTER DATABASE [{databaseName}] SET MULTI_USER");
+            server.ConnectionContext.ExecuteNonQuery($"ALTER DATABASE [{this.databaseName}] SET MULTI_USER");
 
             return true;
         }
@@ -65,9 +64,11 @@ namespace ApexiBee.Infrastructure.Implementation.Services
         public DateTime? GetLastBackupDate()
         {
             string query = $"USE msdb;\r\nSELECT TOP 1 MAX(bs.backup_finish_date) FROM backupset bs WHERE bs.database_name = '{databaseName}'";
-            string? connectionString = _configurationHelper.GetConnectionString("default");
+            string? connectionString = this._configurationHelper.GetConnectionString("default");
             if (connectionString == null)
+            {
                 return null;
+            }
 
             DateTime? lastBackupDate;
 
@@ -79,10 +80,15 @@ namespace ApexiBee.Infrastructure.Implementation.Services
                     lastBackupDate = command.ExecuteScalar() as DateTime?;
                 }
             }
+
             if (lastBackupDate.HasValue)
+            {
                 return lastBackupDate;
+            }
             else
+            {
                 return null;
+            }
         }
     }
 }

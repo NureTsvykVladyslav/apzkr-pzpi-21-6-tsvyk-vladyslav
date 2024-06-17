@@ -10,7 +10,9 @@ namespace ApexiBee.Domain.Models
     public class Apiary : BaseEntity
     {
         public string Name { get; set; }
+
         public string Description { get; set; }
+
         public DateTime CreationDate { get; set; }
 
         public Guid BeekeeperId { get; set; }

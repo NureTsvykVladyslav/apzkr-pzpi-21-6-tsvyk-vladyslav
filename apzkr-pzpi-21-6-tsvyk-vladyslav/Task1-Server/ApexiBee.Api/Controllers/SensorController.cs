@@ -32,7 +32,7 @@ namespace ApexiBee.API.Controllers
         }
 
         [HttpPost("readings/hub/{hubId}")]
-        public async Task<IActionResult> AddSensorReadings([FromBody] IEnumerable<NewSensorReading> sensorReadings, [FromRoute]Guid hubId)
+        public async Task<IActionResult> AddSensorReadings([FromBody] IEnumerable<NewSensorReading> sensorReadings, [FromRoute] Guid hubId)
         {
             var addedReadings = await sensorService.AddSensorReadings(sensorReadings, hubId);
             return Ok(new { message = $"Successfully added {addedReadings.Item1} of {addedReadings.Item2} readings" });
@@ -71,6 +71,35 @@ namespace ApexiBee.API.Controllers
         {
             var sensorTypes = await sensorService.GetSensorTypes();
             return Ok(sensorTypes);
+        }
+
+        [HttpGet("{sensorId}")]
+        public async Task<IActionResult> GetSensorWithDetails(Guid sensorId)
+        {
+            var sensor = await sensorService.GetSensorWithDetails(sensorId);
+            return Ok(sensor);
+        }
+
+        [HttpGet("hive/{hiveId}")]
+        public async Task<IActionResult> GetHiveSensors(Guid hiveId)
+        {
+            var sensors = await sensorService.GetAllHiveSensors(hiveId);
+            return Ok(sensors);
+        }
+
+        [HttpGet("type/sensorId/{sensorId}")]
+        public async Task<IActionResult> GetSensorTypeBySensorId(Guid sensorId)
+        {
+            var sensorType = await sensorService.GetSensorTypeBySensorId(sensorId);
+            return Ok(sensorType);
+        }
+
+        [HttpGet("brief/{sensorId}")]
+        public async Task<IActionResult> GetSensorById(Guid sensorId)
+        {
+            var sensor = await sensorService.GetSensorWithDetails(sensorId);
+            sensor.SensorReadings = null;
+            return Ok(sensor);
         }
     }
 }

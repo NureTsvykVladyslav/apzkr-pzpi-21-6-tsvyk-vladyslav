@@ -1,6 +1,6 @@
-﻿using ApexiBee.Application.Exceptions;
+﻿using System.Net;
+using ApexiBee.Application.Exceptions;
 using Newtonsoft.Json;
-using System.Net;
 
 namespace ApexiBee.API.Middleware
 {
@@ -40,11 +40,11 @@ namespace ApexiBee.API.Middleware
             }
         }
 
-        private static Task WriteErrorResponse(HttpContext context, int statusCode, string message)
+        private static Task WriteErrorResponse(HttpContext context, int statusCode, string errorMessage)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = statusCode;
-            var result = JsonConvert.SerializeObject(new { error = message });
+            var result = JsonConvert.SerializeObject(new { message = errorMessage });
             return context.Response.WriteAsync(result);
         }
 
@@ -53,7 +53,7 @@ namespace ApexiBee.API.Middleware
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-            var result = JsonConvert.SerializeObject(new { error = exception.Message });
+            var result = JsonConvert.SerializeObject(new { message = exception.Message });
             return context.Response.WriteAsync(result);
         }
     }

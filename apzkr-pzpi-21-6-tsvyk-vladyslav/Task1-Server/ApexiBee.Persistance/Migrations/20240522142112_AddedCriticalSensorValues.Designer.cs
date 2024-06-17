@@ -4,6 +4,7 @@ using ApexiBee.Persistance.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApexiBee.Persistance.Migrations
 {
     [DbContext(typeof(BeeDbContext))]
-    partial class BeeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240522142112_AddedCriticalSensorValues")]
+    partial class AddedCriticalSensorValues
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -267,12 +269,6 @@ namespace ApexiBee.Persistance.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2");

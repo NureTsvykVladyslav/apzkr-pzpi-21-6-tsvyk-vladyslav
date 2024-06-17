@@ -77,5 +77,19 @@ namespace ApexiBee.API.Controllers
             var apiaries = await apiaryService.GetAllApiariesWithHives();
             return Ok(apiaries);
         }
+
+        [HttpGet("hive/configuration/{hiveId}")]
+        public async Task<IActionResult> GetHiveConfiguration(Guid hiveId)
+        {
+            var configuration = await apiaryService.GetHiveConfiguration(hiveId);
+            return Ok(configuration);
+        }
+
+        [HttpGet("/api/hive/{hiveId}")]
+        public async Task<IActionResult> GetHiveById(Guid hiveId)
+        {
+            var foundHive = await apiaryService.GetHiveById(hiveId);
+            return Ok(foundHive);
+        }
     }
 }

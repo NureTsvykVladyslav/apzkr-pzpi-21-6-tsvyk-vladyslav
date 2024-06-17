@@ -2,18 +2,15 @@
 using ApexiBee.Infrastructure.Interfaces.Repository;
 using ApexiBee.Persistance.Database;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApexiBee.Infrastructure.Implementation.Repositories
 {
     public class HiveRepository : AbstractRepository, IHiveRepository
     {
-        public HiveRepository(BeeDbContext context) : base(context)
-        { }
+        public HiveRepository(BeeDbContext context)
+            : base(context)
+        {
+        }
 
         public async Task AddAsync(Hive entity)
         {
@@ -46,9 +43,9 @@ namespace ApexiBee.Infrastructure.Implementation.Repositories
             return await context.Hives.FindAsync(id);
         }
 
-        public async Task<Hive> GetByIdWithAllDetailsAsync(Guid id)
+        public async Task<Hive?> GetByIdWithAllDetailsAsync(Guid id)
         {
-            return await context.Hives.Include(e => e.Sensors).Include(e => e.Apiary).FirstOrDefaultAsync(e => e.Id == id);
+            return await context.Hives.Include(e => e.Sensors).ThenInclude(e => e.SensorType).Include(e => e.Apiary).FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public void Update(Hive entity)

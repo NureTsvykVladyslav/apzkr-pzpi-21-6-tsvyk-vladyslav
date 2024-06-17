@@ -1,11 +1,6 @@
 ﻿using ApexiBee.Application.DTO;
 using ApexiBee.Application.DTO.Apiary;
 using ApexiBee.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApexiBee.Application.Interfaces
 {
@@ -29,5 +24,9 @@ namespace ApexiBee.Application.Interfaces
         Task<IEnumerable<Hive>> GetApiaryHives(Guid apiaryId);
 
         Task<IEnumerable<Apiary>> GetAllApiariesWithHives();
+
+        Task<HiveConfiguration> GetHiveConfiguration(Guid hiveId);
+
+        Task<Hive> GetHiveById(Guid hiveId);
     }
 }

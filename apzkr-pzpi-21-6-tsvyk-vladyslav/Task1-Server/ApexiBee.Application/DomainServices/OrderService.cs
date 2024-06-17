@@ -153,8 +153,12 @@ namespace ApexiBee.Application.DomainServices
 
         public async Task<IEnumerable<Order>> GetUserOrders(Guid userId)
         {
-            Console.WriteLine(userId);
             return unitOfWork.OrderRepository.GetAllWithAllDetails().Where(e => e.BeekeeperId == userId).ToList();
+        }
+
+        public async Task<IEnumerable<Order>> GetManagerOrders(Guid managerId)
+        {
+            return unitOfWork.OrderRepository.GetAllWithAllDetails().Where(e => e.ManagerId == managerId || e.ManagerId == null).ToList();
         }
 
         public async Task<Order> PlaceOrder(NewOrderData orderData)
@@ -191,6 +195,20 @@ namespace ApexiBee.Application.DomainServices
             await unitOfWork.SaveAsync();
 
             return order;
+        }
+
+        public async Task<Order> ChangeOrderDescription(Guid orderId, string description)
+        {
+            var foundOrder = await this.unitOfWork.OrderRepository.GetByIdAsync(orderId);
+            if (foundOrder == null)
+            {
+                throw new NotFoundException(orderId, "order");
+            }
+
+            foundOrder.Description = description;
+            this.unitOfWork.OrderRepository.Update(foundOrder);
+            await this.unitOfWork.SaveAsync();
+            return foundOrder;
         }
     }
 }

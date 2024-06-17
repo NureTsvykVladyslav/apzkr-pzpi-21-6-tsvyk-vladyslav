@@ -26,5 +26,11 @@ namespace ApexiBee.Application.Interfaces
         Task<IEnumerable<SensorReading>> GetSensorReadingsWithinPeriod(Guid sensorId, DateTime start, DateTime end);
 
         Task<SensorCountedResult> GetAverageDailySensorValue(Guid sensorId, DateTime date);
+
+        Task<IEnumerable<Sensor>> GetAllHiveSensors(Guid hiveId);
+
+        Task<Sensor> GetSensorWithDetails(Guid sensorId);
+
+        Task<SensorType> GetSensorTypeBySensorId(Guid sensorId);
     }
 }

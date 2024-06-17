@@ -1,4 +1,5 @@
 ﻿using ApexiBee.Application.DTO;
+using ApexiBee.Application.DTO.Orders;
 using ApexiBee.Application.Interfaces;
 using ApexiBee.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -79,6 +80,13 @@ namespace ApexiBee.API.Controllers
             return Ok(orders);
         }
 
+        [HttpGet("manager/all/{managerId}")]
+        public async Task<IActionResult> GetAllManagerOrders([FromRoute] Guid managerId)
+        {
+            var orders = await orderService.GetManagerOrders(managerId);
+            return Ok(orders);
+        }
+
         [HttpPost("filter")]
         public async Task<IActionResult> GetAllOrdersWithFilters([FromBody] OrderFilter filters)
         {
@@ -86,5 +94,11 @@ namespace ApexiBee.API.Controllers
             return Ok(orders);
         }
 
+        [HttpPatch("{orderId}/description")]
+        public async Task<IActionResult> ChangeOrderDescription([FromRoute] Guid orderId, [FromBody] ChangeOrderDescriptionModel description)
+        {
+            var changedOrder = await orderService.ChangeOrderDescription(orderId, description.Description!);
+            return Ok(changedOrder);
+        }
     }
 }

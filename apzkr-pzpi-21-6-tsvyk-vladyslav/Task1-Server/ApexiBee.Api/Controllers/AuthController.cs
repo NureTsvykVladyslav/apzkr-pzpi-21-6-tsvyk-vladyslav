@@ -36,7 +36,7 @@ namespace ApexiBee.API.Controllers
             var jwt = await this.authService.Login(authUserData);
             if (jwt == null)
             {
-                return Unauthorized("Incorrect credentials");
+                return Unauthorized(new { message = "Incorrect credentials" });
             }
 
             return Ok(new { token = jwt });
@@ -72,7 +72,9 @@ namespace ApexiBee.API.Controllers
             var addRoleResult = await this.authService.AddRoleToUser(model);
 
             if (addRoleResult)
+            {
                 return Ok();
+            }
 
             return BadRequest();
         }

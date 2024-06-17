@@ -8,15 +8,6 @@ using ApexiBee.Persistance.Database;
 using ApexiBee.Persistance.EntityConfiguration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApexiBee.Infrastructure.Implementation.Services
 {
@@ -33,8 +24,7 @@ namespace ApexiBee.Infrastructure.Implementation.Services
             RoleManager<IdentityRole<Guid>> roleManager,
             JwtHelper jwtHelper,
             IUnitOfWork unitOfWork,
-            BeeDbContext context
-        )
+            BeeDbContext context)
         {
             this.jwtHelper = jwtHelper;
             this.userManager = userManager;
@@ -52,18 +42,18 @@ namespace ApexiBee.Infrastructure.Implementation.Services
                 throw new AlreadyExistsException("user", "email or login");
             }
 
-            if (userData.Role == null || userData.Role == "")
+            if (userData.Role == null || userData.Role == string.Empty)
             {
                 userData.Role = "user";
             }
 
             var foundRole = await roleManager.FindByNameAsync(userData.Role.ToLower());
-            if(foundRole == null)
+            if (foundRole == null)
             {
                 throw new NotFoundException("role");
             }
 
-            if(userData.Username == null)
+            if (userData.Username == null)
             {
                 userData.Username = userData.Email;
             }
@@ -74,7 +64,7 @@ namespace ApexiBee.Infrastructure.Implementation.Services
             var newUser = new ApplicationUser() { Id = Guid.NewGuid(), UserName = userData.Username, Email = userData.Email, UserAccountId = userAccount.Id };
             var userCreatedResult = await userManager.CreateAsync(newUser, userData.Password);
 
-            if(!userCreatedResult.Succeeded)
+            if (!userCreatedResult.Succeeded)
             {
                 return false;
             }
@@ -86,18 +76,18 @@ namespace ApexiBee.Infrastructure.Implementation.Services
         public async Task<string?> Login(AuthUserData authData)
         {
             var foundUser = await userManager.FindByNameAsync(authData.Username);
-            if(foundUser == null)
+            if (foundUser == null)
             {
                 return null;
             }
 
             var passwordCheck = await userManager.CheckPasswordAsync(foundUser, authData.Password);
-            if(!passwordCheck)
+            if (!passwordCheck)
             {
                 return null;
             }
 
-            string roleName = "";
+            string roleName = string.Empty;
 
             var roles = await context.Roles
                 .Where(r => context.UserRoles
@@ -106,13 +96,12 @@ namespace ApexiBee.Infrastructure.Implementation.Services
                     .Contains(r.Id))
                 .ToListAsync();
 
-            if(roles.Count > 0) 
+            if (roles.Count > 0)
             {
-                roleName = String.Join(";", roles);
+                roleName = string.Join(";", roles);
             }
 
             string jwt = jwtHelper.GenerateJwtToken(foundUser.UserAccountId, foundUser.Id, authData.Username, roleName);
-            
             return jwt;
         }
 

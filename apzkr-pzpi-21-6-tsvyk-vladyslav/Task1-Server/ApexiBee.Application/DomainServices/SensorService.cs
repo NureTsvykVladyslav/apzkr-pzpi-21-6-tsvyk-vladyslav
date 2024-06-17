@@ -5,18 +5,15 @@ using ApexiBee.Application.Interfaces;
 using ApexiBee.Application.Services;
 using ApexiBee.Domain.Models;
 using ApexiBee.Infrastructure.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApexiBee.Application.DomainServices
 {
     public class SensorService : ServiceBase, ISensorService
     {
-        public SensorService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        { }
+        public SensorService(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
+        {
+        }
 
         public async Task<Sensor> AddNewSensor(NewSensorData newSensorData)
         {
@@ -57,14 +54,14 @@ namespace ApexiBee.Application.DomainServices
             int totalReadings = readings.Count();
             int addedReadings = 0;
             HubStation? foundHub = await unitOfWork.HubStationRepository.GetByIdAsync(senderHubId);
-            if(foundHub == null)
+            if (foundHub == null)
             {
                 throw new NotFoundException(senderHubId, "hub station");
             }
 
             Guid[] sensorIds = unitOfWork.SensorRepository.GetAll().Select(e => e.Id).ToArray();
 
-            foreach(NewSensorReading reading in readings)
+            foreach (NewSensorReading reading in readings)
             {
                 if (sensorIds.Contains(reading.SensorId))
                 {
@@ -89,26 +86,32 @@ namespace ApexiBee.Application.DomainServices
             {
                 await unitOfWork.SensorRepository.DeleteByIdAsync(sensorId);
             }
-            catch (InvalidOperationException) 
+            catch (InvalidOperationException)
             {
                 throw new NotFoundException(sensorId, "sensor");
             }
         }
 
+        public async Task<IEnumerable<Sensor>> GetAllHiveSensors(Guid hiveId)
+        {
+            var sensors = this.unitOfWork.SensorRepository.GetAll().Where(e => e.HiveId == hiveId).ToList();
+            return sensors;
+        }
+
         public async Task<SensorCountedResult> GetAverageDailySensorValue(Guid sensorId, DateTime date)
         {
             Sensor? foundSensor = await unitOfWork.SensorRepository.GetByIdAsync(sensorId);
-            if(foundSensor == null)
+            if (foundSensor == null)
             {
                 throw new NotFoundException(sensorId, "sensor");
             }
 
-            SensorType sensorType = (await unitOfWork.SensorTypeRepository.GetByIdAsync(foundSensor.SensorTypeId))!;
+            SensorType sensorType = (await unitOfWork.SensorTypeRepository.GetByIdAsync(foundSensor.SensorTypeId)) !;
 
             IEnumerable<SensorReading> sensorReadings = unitOfWork.SensorReadingRepository
                 .GetAll().Where(e => e.ReadingDate.Date == date.Date && e.SensorId == sensorId).ToList();
 
-            if(!sensorReadings.Any())
+            if (!sensorReadings.Any())
             {
                 SensorCountedResult incorrectResult = new SensorCountedResult()
                 {
@@ -132,13 +135,12 @@ namespace ApexiBee.Application.DomainServices
                 MeasureUnit = sensorType.MeasureUnit
             };
             return result;
-
         }
 
         public async Task<IEnumerable<SensorReading>> GetLastHiveSensorData(Guid hiveId)
         {
             Hive? foundHive = await unitOfWork.HiveRepository.GetByIdWithAllDetailsAsync(hiveId);
-            if(foundHive == null)
+            if (foundHive == null)
             {
                 throw new NotFoundException(hiveId, "hive");
             }
@@ -158,7 +160,7 @@ namespace ApexiBee.Application.DomainServices
         public async Task<IEnumerable<SensorReading>> GetSensorReadingsWithinPeriod(Guid sensorId, DateTime start, DateTime end)
         {
             Sensor? foundSensor = await unitOfWork.SensorRepository.GetByIdAsync(sensorId);
-            if(foundSensor == null)
+            if (foundSensor == null)
             {
                 throw new NotFoundException(sensorId, "sensor");
             }
@@ -169,16 +171,42 @@ namespace ApexiBee.Application.DomainServices
             return sensorReadingsWithinPeriod;
         }
 
+        public async Task<Sensor> GetSensorWithDetails(Guid sensorId)
+        {
+            var sensor = await this.unitOfWork.SensorRepository.GetByIdWithAllDetailsAsync(sensorId);
+            if (sensor == null)
+            {
+                throw new NotFoundException(sensorId, "sensor");
+            }
+
+            sensor.SensorReadings = null;
+            return sensor;
+        }
+
         public async Task<IEnumerable<SensorType>> GetSensorTypes()
         {
             var sensorTypes = unitOfWork.SensorTypeRepository.GetAll().ToList();
             return sensorTypes;
         }
 
+        public async Task<SensorType> GetSensorTypeBySensorId(Guid sensorId)
+        {
+            var foundSensor = await this.unitOfWork.SensorRepository.GetByIdAsync(sensorId);
+            if (foundSensor == null)
+            {
+                throw new NotFoundException(sensorId, "sensor");
+            }
+
+            var sensorType = await this.unitOfWork.SensorTypeRepository.GetByIdAsync(foundSensor.SensorTypeId);
+            return sensorType!;
+        }
+
         private double CalculateWeightedAverage(SensorReading[] readings)
         {
             if (readings == null || readings.Length == 0)
+            {
                 throw new ArgumentException("The readings array is empty or null.");
+            }
 
             var sortedReadings = readings.OrderBy(r => r.ReadingDate).ToArray();
 

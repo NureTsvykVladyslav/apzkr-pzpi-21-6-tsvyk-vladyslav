@@ -51,6 +51,5 @@ namespace ApexiBee.API.Controllers
             else
                 return backupDate;
         }
-
     }
 }
